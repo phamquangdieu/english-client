@@ -3,9 +3,8 @@ import styles from './styles.module.css';
 import VanillaTilt from 'vanilla-tilt';
 import styled from 'styled-components';
 
-const GlassCard = ({ number, title, selectedAnswer, setSelectedAnswer }) => {
-    const [activated, setActivated] = useState(false);
-    const onClick = () => setSelectedAnswer(number);
+const GlassCard = ({ keyAnswer, title, selectedAnswer, setSelectedAnswer, current }) => {
+    const onClick = () => setSelectedAnswer(prev => ({...prev, [current]: keyAnswer}));
     const ref = useRef(null);
     useEffect(() => {
         if (ref.current) {
@@ -15,12 +14,11 @@ const GlassCard = ({ number, title, selectedAnswer, setSelectedAnswer }) => {
         });
         }
     }, []);
-    console.log(activated);
     return (
-        <CustomizeCard className={styles.cardContainer} ref={ref} onClick={onClick} active={number === selectedAnswer}>
+        <CustomizeCard className={styles.cardContainer} ref={ref} onClick={onClick} active={keyAnswer === selectedAnswer[current]}>
           <div className={styles.content}>
-            <div className={styles.number}>{number}. </div>
-            <div className={styles.title}>{title}</div>
+            <div className={styles.number}>{`${keyAnswer}.  ${title}`}</div>
+            <div className={styles.title}></div>
           </div>
         </CustomizeCard>
     )
@@ -30,5 +28,5 @@ export default GlassCard;
 
 const CustomizeCard = styled.div`
   background-color: ${props => (props.active ? '#00FF9E' : 'rgba(255, 255, 255, 0.1)')};
-  color: ${props => (props.active && '#A363FF')}
+  color: ${props => (props.active && '#A363FF')};
 `;
