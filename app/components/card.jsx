@@ -29,6 +29,6 @@ const GlassCard = ({ number, title, selectedAnswer, setSelectedAnswer }) => {
 export default GlassCard;
 
 const CustomizeCard = styled.div`
-  background-color: ${props => (props.active ? '#00ffa0' : 'rgba(255, 255, 255, 0.1)')};
-  color: ${props => (props.active && '#f3be1c')}
+  background-color: ${props => (props.active ? '#00FF9E' : 'rgba(255, 255, 255, 0.1)')};
+  color: ${props => (props.active && '#A363FF')}
 `;
