@@ -11,6 +11,7 @@ export default function QuizScreen() {
   const [selectedAnswer, setSelectedAnswer] = useState({});
   const [current, setCurrent] = useState(0);
   const [hasResult, setHasResult] = useState(false);
+  console.log(selectedAnswer)
   const onNext = () => {
     if (current < data.length - 1) setCurrent(prev => prev + 1);
     else setHasResult(true);

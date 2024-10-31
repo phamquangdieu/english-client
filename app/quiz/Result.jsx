@@ -7,7 +7,7 @@ const Result = () => {
             <div className='rounded-xl'>
                 <Image
                 className='rounded-[50px]'
-                    src={'/leo-fail.webp'}
+                    src={'/cat.jpg'}
                     width={0}
                     height={0}
                     sizes="100vw"

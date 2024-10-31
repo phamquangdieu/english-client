@@ -22,7 +22,7 @@ export default function HomeScreen() {
   return (
     <div ref={container} className="bg-home bg-gray-300 flex flex-col gap-12 w-full h-[100vh] justify-center items-center">
       <button 
-        onClick={() => router.push('/quiz')}
+        onClick={() => router.push('/add-word')}
         className={`btn-create ${styles.btn} w-[300px] bg-white rounded-2xl`}>
         <div className='text-2xl p-4 text-center font-bold from-electricViolet via-pink-600 to-vibrantBlue bg-gradient-to-r bg-clip-text text-transparent'>
           Thêm mới
