@@ -16,7 +16,7 @@ const AddWord = () => {
       <div className='mb-12 text-6xl text-center font-bold from-neonGreen  to-yellow-300 bg-gradient-to-r bg-clip-text text-transparent'>
           Thêm mới
       </div>
-      <Form form={form} className='w-full' className="w-[800px]" onFinish={onFinish}>
+      <Form form={form} className="w-[800px]" onFinish={onFinish}>
         <Form.Item name="word">
           <div class="p-1 rounded-full bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
             <input class="p-3 w-full rounded-full focus:outline-none" type="text" placeholder="Từ (Tiếng Anh)" />

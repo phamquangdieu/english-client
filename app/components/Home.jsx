@@ -31,7 +31,7 @@ export default function HomeScreen() {
       <button
         onClick={() => router.push('/quiz')}
         className={`btn-test ${styles.btn} w-[300px] bg-gradient-to-tr from-electricViolet via-pink-600 to-vibrantBlue rounded-2xl`}>
-        <div className='text-2xl p-4 text-center'>
+        <div className='text-2xl p-4 text-center text-white'>
           Kiểm tra
         </div>
       </button>
