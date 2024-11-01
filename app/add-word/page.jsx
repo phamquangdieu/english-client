@@ -41,6 +41,7 @@ const AddWord = () => {
         <Form.Item>
           <div className='flex justify-center gap-8 items-center'>
             <button 
+              type="button"
               onClick={() => router.push('/')}
               className={`w-[200px] bg-white rounded-2xl`}>
               <div className='text-base p-4 text-center font-bold from-electricViolet via-pink-600 to-vibrantBlue bg-gradient-to-r bg-clip-text text-transparent'>
