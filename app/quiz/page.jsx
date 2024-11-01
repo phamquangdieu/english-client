@@ -3,31 +3,56 @@ import styles from './styles.module.css';
 import Question from './Question';
 import Count from './Count';
 import { useState } from 'react';
-import {data} from './mock'
 import Result from './Result'
+import { useMutation, useQuery } from '@tanstack/react-query';
+import wordApi from '../api/wordApi';
+import LoadingScreen from '../loading';
 
 export default function QuizScreen() {
-  const [dataQuestions, setDataQuestions] = useState();
+  const { data: dataQuestions, isLoading, refetch, isFetching } = useQuery({
+    queryKey: 'questions',
+    queryFn: () => wordApi.getQuestions(),
+  });
+  const idQuiz = dataQuestions?.data?.id;
+  const data = dataQuestions?.data?.content;
   const [selectedAnswer, setSelectedAnswer] = useState({});
   const [current, setCurrent] = useState(0);
-  const [hasResult, setHasResult] = useState(false);
-  console.log(selectedAnswer)
+  const [result, setResult] = useState();
+  const { mutate } = useMutation({
+    mutationKey: 'checkResult',
+    mutationFn: wordApi.checkResult,
+    onSuccess: (data) => {
+      setResult(data?.data);
+    }
+  });
   const onNext = () => {
     if (current < data.length - 1) setCurrent(prev => prev + 1);
-    else setHasResult(true);
+    else {
+      mutate({
+        id: idQuiz,
+        answers: selectedAnswer,
+      });
+    }
   }
   const onPrev = () => {
     if (current > 0) setCurrent(prev => prev - 1);
   }
+  const onRefresh = () => {
+    setResult(null);
+    setCurrent(0);
+    setSelectedAnswer({});
+    refetch();
+  }
+  if (isLoading || isFetching) return <LoadingScreen />
   return (
     <div className={styles.glassCard}>
-      {!hasResult && (
+      {!result && (
         <div className='absolute top-10 right-10'>
           <Count />
         </div>
       )}
       <div className={styles.container}>
-        {hasResult ? <Result /> : (
+        {result ? <Result data={result} onRefresh={onRefresh} /> : (
           <>
             <Question
               currentData={data[current]}
@@ -47,7 +72,7 @@ export default function QuizScreen() {
                 onClick={onNext}
                 className={`${styles.btn} w-[200px] bg-gradient-to-tr from-electricViolet via-pink-600 to-vibrantBlue rounded-2xl`}>
                 <div className='text-2xl p-4 text-center'>
-                  Tiếp &gt;&gt;
+                  {current === data.length - 1 ? 'Xong' : <>Tiếp &gt;&gt;</>}
                 </div>
               </button>
             </div>

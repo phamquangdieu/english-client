@@ -1,15 +1,26 @@
 'use client';
 
-import { Form, Input } from 'antd';
+import { useMutation } from '@tanstack/react-query';
+import { Form, Spin, message } from 'antd';
 import { useRouter } from 'next/navigation';
-import React from 'react'
+import React from 'react';
+import wordApi from '../api/wordApi';
 
 const AddWord = () => {
   const router = useRouter();
   const [form] = Form.useForm();
+  const {mutate, isPending} = useMutation({
+    mutationKey: 'addWord',
+    mutationFn: wordApi.addWord,
+    onSuccess: () => {
+      message.success('Tạo thành công!');
+      form.resetFields();
+    },
+    onError: () => message.error('Có lỗi xảy ra!')
+  });
   const onFinish = () => {
     const values = form.getFieldsValue();
-    console.log(values);
+    mutate(values);
   }
   return (
     <div className='bg-add-word h-[100vh] p-[200px] flex flex-col items-center justify-center w-full'>
@@ -40,7 +51,7 @@ const AddWord = () => {
               type='submit'
               className={`btn-test w-[200px] bg-gradient-to-tr from-electricViolet via-pink-600 to-vibrantBlue rounded-2xl`}>
               <div className='text-base p-4 text-center text-white'>
-                Tạo mới
+                {isPending ? <Spin /> : 'Tạo mới'}
               </div>
             </button>
           </div>
