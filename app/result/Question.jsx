@@ -4,7 +4,6 @@ import GlassCard from './GlassCard';
 import { map } from 'lodash';
 
 const Question = ({ currentData, current }) => {
-  console.log(currentData);
   const title = useMemo(() => {
     if (currentData.type === 'vi') {
       return <div>{current + 1}. Từ nào dưới đây có nghĩa là <span style={{color: '#e9850f'}}>&quot;{currentData.word}&quot;</span>?</div>
