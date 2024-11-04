@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React from 'react'
+import React, { useEffect } from 'react'
 import {size} from 'lodash';
 import styles from './styles.module.css'
 import { useRouter } from 'next/navigation';
@@ -23,11 +23,16 @@ const failImg = [
 const randomNumber = (max) => {
     return Math.floor(Math.random() * max);
 }
-
+const soundUrl = '/kids_cheering.mp3'
 const Result = ({ data, onRefresh }) => {
-    const router = useRouter();
+    const sound = React.useRef(new Audio(soundUrl));
     const {correct,result} = data;
     const percent = Math.floor((correct*100) / size(result));
+    useEffect(() => {
+        if (percent > 80) {
+            sound.current.play();
+        }
+    }, [percent]);
     const renderColor = (val) => {
         if (val >= 80) return '#00FF9E';
         if (val >= 60) return '#e9850f';
@@ -65,7 +70,7 @@ const Result = ({ data, onRefresh }) => {
                 <button
                     className={`${styles.btn} w-[200px] bg-gradient-to-tr from-electricViolet via-pink-600 to-vibrantBlue rounded-2xl`}>
                     <div className='text-xl p-4 text-center'>
-                    Xem chi tiết
+                    Chi tiết
                     </div>
                 </button></Link>
                 <button
