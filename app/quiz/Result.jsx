@@ -2,6 +2,8 @@ import Image from 'next/image';
 import React from 'react'
 import {size} from 'lodash';
 import styles from './styles.module.css'
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const highImg = [
     '/leo-high.jpg'
@@ -23,6 +25,7 @@ const randomNumber = (max) => {
 }
 
 const Result = ({ data, onRefresh }) => {
+    const router = useRouter();
     const {correct,result} = data;
     const percent = Math.floor((correct*100) / size(result));
     const renderColor = (val) => {
@@ -57,7 +60,14 @@ const Result = ({ data, onRefresh }) => {
             <div className='text-2xl mt-12'>
                 Số câu trả lời đúng là <span style={{ color: renderColor(percent) }}>{correct}/{size(result)}</span>
             </div>
-            <div className='mt-8'>
+            <div className='mt-8 flex gap-4'>
+                <Link href={`/result?id=${data.id}`} target='_blank'>
+                <button
+                    className={`${styles.btn} w-[200px] bg-gradient-to-tr from-electricViolet via-pink-600 to-vibrantBlue rounded-2xl`}>
+                    <div className='text-xl p-4 text-center'>
+                    Xem chi tiết
+                    </div>
+                </button></Link>
                 <button
                     onClick={onRefresh}
                     className={`${styles.btn} w-[200px] bg-gradient-to-tr from-electricViolet via-pink-600 to-vibrantBlue rounded-2xl`}>

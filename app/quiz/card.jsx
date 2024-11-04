@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import styles from './styles.module.css';
 import VanillaTilt from 'vanilla-tilt';
 import styled from 'styled-components';
@@ -15,7 +15,12 @@ const GlassCard = ({ keyAnswer, title, selectedAnswer, setSelectedAnswer, curren
         }
     }, []);
     return (
-        <CustomizeCard className={styles.cardContainer} ref={ref} onClick={onClick} active={keyAnswer === selectedAnswer[current]}>
+        <CustomizeCard 
+          className={styles.cardContainer}
+          ref={ref}
+          onClick={onClick}
+          active={keyAnswer === selectedAnswer[current]}
+        >
           <div className={styles.content}>
             <div className={styles.number}>{`${keyAnswer}.  ${title}`}</div>
             <div className={styles.title}></div>

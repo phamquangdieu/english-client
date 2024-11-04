@@ -1,16 +1,26 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {size} from 'lodash';
-
-const Count = () => {
-    const [counter, setCounter] = useState(75);
-    let counterInterval = useRef(null);
+const soundUrl = '/tick-slow.mp3';
+const soundFastUrl = '/tick-fast.mp3';
+const Counter = ({ autoSubmit }) => {
+    const [counter, setCounter] = useState(90);
+    const sound1 = React.useRef(new Audio(soundUrl));
+    const sound2 = React.useRef(new Audio(soundFastUrl));
     useEffect(() => {
-        if (counter > 0) {
-            counterInterval.current = setInterval(() => {
-                setCounter(prev => prev - 1)
-            }, 1000);
-        }
-        return () => clearInterval(counterInterval.current)
+        const sound = counter > 15 ? sound1.current : sound2.current;
+        const intervalId = setInterval(() => {
+            if (counter > 0) {
+                sound.currentTime = 0;
+                sound.play();
+                setCounter((prevTime) => prevTime - 1);
+            } else {
+                autoSubmit();
+                sound.pause();
+                clearInterval(intervalId);
+            }
+        }, 1000);
+
+        return () => clearInterval(intervalId);
     }, [counter]);
 
     const convertCounter = (val) => {
@@ -21,10 +31,10 @@ const Count = () => {
     }
 
     return (
-        <div className='text-2xl' style={{ color: counter <= 30 ? 'red' : 'white'}}>
+        <div className='text-2xl' style={{ color: counter <= 15 ? 'red' : 'white'}}>
             {convertCounter(counter)}
         </div>
     );
 }
  
-export default Count;
+export default Counter;
