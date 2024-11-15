@@ -1,3 +1,18 @@
 {
-  "extends": "next/core-web-vitals"
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": ["next", "next/core-web-vitals", "eslint:recommended", "plugin:prettier/recommended"],
+  "rules": {
+    "semi": ["error", "always"],
+    "quotes": [2, "single", { "avoidEscape": true }],
+    "no-unused-vars": "warn",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
+  }
 }
