@@ -3,11 +3,11 @@ import { size } from 'lodash';
 const soundUrl = '/tick-slow.mp3';
 const soundFastUrl = '/tick-fast.mp3';
 const Counter = ({ autoSubmit }) => {
-  const [counter, setCounter] = useState(90);
+  const [counter, setCounter] = useState(60);
   const sound1 = React.useRef(new Audio(soundUrl));
   const sound2 = React.useRef(new Audio(soundFastUrl));
   useEffect(() => {
-    const sound = counter > 15 ? sound1.current : sound2.current;
+    const sound = counter > 10 ? sound1.current : sound2.current;
     const intervalId = setInterval(() => {
       if (counter > 0) {
         sound.currentTime = 0;
@@ -33,7 +33,7 @@ const Counter = ({ autoSubmit }) => {
   return (
     <div
       className="text-2xl"
-      style={{ color: counter <= 15 ? 'red' : 'white' }}
+      style={{ color: counter <= 10 ? 'red' : 'white' }}
     >
       {convertCounter(counter)}
     </div>

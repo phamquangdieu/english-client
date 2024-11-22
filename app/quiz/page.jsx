@@ -10,14 +10,14 @@ import styles from './styles.module.css';
 
 export default function QuizScreen() {
   const [start, setStart] = useState(false);
+  const [type, setType] = useState();
   const {
     data: dataQuestions,
     isLoading,
-    refetch,
     isFetching,
   } = useQuery({
     queryKey: 'questions',
-    queryFn: () => wordApi.getQuestions(),
+    queryFn: () => wordApi.getQuestions({ type }),
     enabled: start,
   });
   const idQuiz = dataQuestions?.data?.id;
@@ -61,20 +61,41 @@ export default function QuizScreen() {
     setStart(false);
   };
 
-  const onStart = () => {
+  const onStart = (type) => {
     setStart(true);
+    setType(type);
   };
 
   if (isLoading || isFetching) return <LoadingScreen />;
   const renderContent = () => {
     if (!start) {
       return (
-        <button
-          onClick={onStart}
-          className={`${styles.btn} w-[200px] bg-gradient-to-tr from-neonGreen  to-yellow-400 rounded-2xl border-2 border-white`}
-        >
-          <div className="text-2xl p-4 text-center">Bắt đầu</div>
-        </button>
+        <div className="flex gap-4">
+          <button
+            onClick={() => onStart('b2')}
+            className={`${styles.btn} w-[200px] bg-gradient-to-tr from-[#f6d365]  to-[#fda085] rounded-2xl border-[1px] border-white`}
+          >
+            <div className="text-2xl p-4 text-center">Level B2</div>
+          </button>
+          <button
+            onClick={() => onStart('phrasal_verb')}
+            className={`${styles.btn} w-[200px] bg-gradient-to-tr from-[#c94b4b]  to-[#4b134f] rounded-2xl border-[1px] border-white`}
+          >
+            <div className="text-2xl p-4 text-center">Phrasal Verb</div>
+          </button>
+          <button
+            onClick={() => onStart('phrasal')}
+            className={`${styles.btn} w-[200px] bg-gradient-to-tr from-[#5ee7df]  to-[#b490ca] rounded-2xl border-[1px] border-white`}
+          >
+            <div className="text-2xl p-4 text-center">Phrasal</div>
+          </button>
+          <button
+            onClick={() => onStart('idioms')}
+            className={`${styles.btn} w-[200px] bg-gradient-to-tr from-[#f093fb]  to-[#f5576c] rounded-2xl border-[1px] border-white`}
+          >
+            <div className="text-2xl p-4 text-center">Idioms</div>
+          </button>
+        </div>
       );
     }
     if (result) {

@@ -1,18 +1,10 @@
-import React, { useEffect, useRef } from 'react';
-import styles from './styles.module.css';
-import VanillaTilt from 'vanilla-tilt';
+import { useRef } from 'react';
 import styled from 'styled-components';
+import styles from './styles.module.css';
+import { size } from 'lodash';
 
-const GlassCard = ({ keyAnswer, title, current, right, yourChoice }) => {
+const GlassCard = ({ keyAnswer, title, right, yourChoice }) => {
   const ref = useRef(null);
-  useEffect(() => {
-    if (ref.current) {
-      VanillaTilt.init(ref.current, {
-        max: 25,
-        speed: 400,
-      });
-    }
-  }, []);
   return (
     <CustomizeCard
       className={styles.cardContainer}
@@ -20,7 +12,10 @@ const GlassCard = ({ keyAnswer, title, current, right, yourChoice }) => {
       right={right}
       yourChoice={yourChoice}
     >
-      <div className={styles.content}>
+      <div
+        className={styles.content}
+        style={{ fontSize: size(title) > 20 && '20px' }}
+      >
         <div className={styles.number}>{`${keyAnswer}.  ${title}`}</div>
         <div className={styles.title}></div>
       </div>

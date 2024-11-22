@@ -20,14 +20,14 @@ const Login = () => {
 
   const login = useGoogleLogin({
     onSuccess: (response) => {
-      console.log(response);
       mutate({ token: response?.access_token });
     },
   });
   return (
-    <div>
-      {/* <GoogleLogin onSuccess={responseMessage} onError={errorMessage} /> */}
-      <Button onClick={login}>123</Button>
+    <div className='bg-home h-[100vh] w-full flex items-center justify-center'>
+      <button onClick={login} class="m-4 p-1 rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
+        <span class="block text-black px-8 py-4 font-semibold rounded-full bg-white">Login with google</span>
+      </button>
     </div>
   );
 };

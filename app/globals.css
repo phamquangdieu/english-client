@@ -36,6 +36,10 @@ body {
   font-family: Supercell;
 }
 
+.login-btn {
+  font-family: Supercell;
+}
+
 .bg-home {
   background-image: linear-gradient(
       180deg,

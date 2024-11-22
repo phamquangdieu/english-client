@@ -5,11 +5,37 @@ import styles from './styles.module.css';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
-const highImg = ['/leo-high.jpg'];
+const highImg = [
+  '/leo-high.jpg',
+  '/success-kid.png',
+  '/panda-2.jpg',
+  '/panda-4.jpeg',
+  '/think.jpg'
+];
 
-const averageImg = ['/cat-unknown.jpg', '/cat.jpg'];
+const averageImg = [
+  '/cat-unknown.jpg',
+  '/cat.jpg',
+  '/panda-1.png',
+  '/panda-7.jpeg',
+  '/panda-9.jpg',
+  '/frog-1.jpg',
+  '/cat-4.jpeg',
+  '/cat-5.jpg',
+  '/confuse.jpg'
+];
 
-const failImg = ['/leo-fail.webp', '/sad-cat.gif'];
+const failImg = [
+  '/leo-fail.webp',
+  '/sad-cat.gif',
+  '/panda-3.jpg',
+  '/panda-6.jpg',
+  '/panda-8.jpg',
+  '/panda-10.jpg',
+  '/frog-2.png',
+  '/yao-ming-png',
+  '/cat-3.png',
+];
 
 const randomNumber = (max) => {
   return Math.floor(Math.random() * max);

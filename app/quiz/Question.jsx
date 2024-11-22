@@ -1,7 +1,7 @@
 import { Col, Row, Spin } from 'antd';
 import React, { useMemo } from 'react';
 import GlassCard from './card';
-import { map } from 'lodash';
+import { map, size } from 'lodash';
 
 const Question = ({
   selectedAnswer,
@@ -10,11 +10,22 @@ const Question = ({
   current,
 }) => {
   const title = useMemo(() => {
+    if (currentData.type === 'synonym') {
+      return (
+        <div>
+          {current + 1}. Từ nào dưới đây đồng nghĩa với{' '}
+          <span className="p-4 text-center font-bold from-orange-400  to-[#FFFF00] bg-gradient-to-t bg-clip-text text-transparent">
+            &quot;{currentData.word}&quot;
+          </span>
+          ?
+        </div>
+      );
+    }
     if (currentData.type === 'vi') {
       return (
         <div>
           {current + 1}. Từ nào dưới đây có nghĩa là{' '}
-          <span style={{ color: '#e9850f' }}>
+          <span className="p-4 text-center font-bold from-orange-400  to-[#FFFF00] bg-gradient-to-t bg-clip-text text-transparent">
             &quot;{currentData.word}&quot;
           </span>
           ?
@@ -24,7 +35,9 @@ const Question = ({
     return (
       <div>
         {current + 1}. Từ{' '}
-        <span style={{ color: '#e9850f' }}>&quot;{currentData.word}&quot;</span>{' '}
+        <span className="p-4 text-center font-bold from-orange-400  to-[#FFFF00] bg-gradient-to-t bg-clip-text text-transparent">
+          &quot;{currentData.word}&quot;
+        </span>{' '}
         có nghĩa là?
       </div>
     );
@@ -48,7 +61,7 @@ const Question = ({
   return (
     <div>
       <div className="text-2xl text-center mb-16">{title}</div>
-      <Row gutter={[32, 32]}>{answers}</Row>
+      <Row gutter={[24, 24]}>{answers}</Row>
     </div>
   );
 };
