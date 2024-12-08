@@ -2,7 +2,6 @@ import Image from 'next/image';
 import React, { useEffect } from 'react';
 import { size } from 'lodash';
 import styles from './styles.module.css';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 const highImg = [
@@ -10,7 +9,7 @@ const highImg = [
   '/success-kid.png',
   '/panda-2.jpg',
   '/panda-4.jpeg',
-  '/think.jpg'
+  '/think.jpg',
 ];
 
 const averageImg = [
@@ -22,7 +21,7 @@ const averageImg = [
   '/frog-1.jpg',
   '/cat-4.jpeg',
   '/cat-5.jpg',
-  '/confuse.jpg'
+  '/confuse.jpg',
 ];
 
 const failImg = [
@@ -33,7 +32,7 @@ const failImg = [
   '/panda-8.jpg',
   '/panda-10.jpg',
   '/frog-2.png',
-  '/yao-ming-png',
+  '/yao-ming.jpg',
   '/cat-3.png',
 ];
 
@@ -77,6 +76,7 @@ const Result = ({ data, onRefresh }) => {
           height={0}
           sizes="100vw"
           style={{ width: 300, height: 'auto' }}
+          alt=""
         />
       </div>
       <div className="text-2xl mt-12">
